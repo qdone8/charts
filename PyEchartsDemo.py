@@ -33,3 +33,6 @@ c = (
     .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     .render("./echarts/pie_base.html")
 )
+
+
+test
