@@ -64,7 +64,7 @@ class WebCharts(QWidget):
         # 发射按钮的clicked信号
         self.btn.clicked.emit()
 
-    # todo:实现按钮的停止刷新文字倒计时5秒
+    # TODO(zhou):实现按钮的停止刷新文字倒计时5秒
     def autoload(self):
         '''每隔5秒 ，自动更新当前页面的数据'''
 
