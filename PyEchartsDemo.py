@@ -1,5 +1,5 @@
 from pyecharts import options as opts
-from pyecharts.charts import Bar,Pie
+from pyecharts.charts import Bar,Pie,Funnel
 from pyecharts.faker import Faker
 from pyecharts.globals import ThemeType
 import random
@@ -34,4 +34,9 @@ c = (
     .render("./echarts/pie_base.html")
 )
 
-
+d=(
+    Funnel()
+    .add('商品',[list(z) for z in zip(Faker.choose(),Faker.values())])
+    .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-基本示例"))
+    .render("./echarts/funnel_base.html")
+)

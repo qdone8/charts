@@ -38,23 +38,25 @@ class WebCharts(QWidget):
         self.timer = QTimer(self)  # 根据self.refresh设置的秒数刷新计时器
         self.timer.timeout.connect(lambda: self.loadweb(self.base + self.url))
 
-        self.timer_combo = QTimer(self)
-        self.timer_combo.timeout.connect(lambda: self.htmlChange())
-        self.timer_combo.start(self.refreshTime)
+        # self.timer_combo = QTimer(self)
+        # self.timer_combo.timeout.connect(lambda: self.htmlChange())
+        # self.timer_combo.start(self.refreshTime)
 
         self.slider = QSlider(self)
         self.slider.setOrientation(Qt.Horizontal)
 
-        # TODO:设置slider的宽度样式
-        self.slider.setMaximum(50)
-        self.slider.setMinimum(10)
-        self.slider.setSingleStep(10)
-        self.slider.valueChanged.connect(self.setRefreshTime)
+        # # TODO:设置slider的宽度样式
+        # self.slider.setMaximum(50)
+        # self.slider.setMinimum(10)
+        # self.slider.setSingleStep(10)
+        # self.slider.valueChanged.connect(self.setRefreshTime)
+
+
         hbox = QHBoxLayout()
         hbox.addWidget(self.combo)
         hbox.addWidget(self.btn)
         hbox.addWidget(self.btn_auto)
-        hbox.addWidget(self.slider)
+        # hbox.addWidget(self.slider)
         hboxweb = QHBoxLayout()
         hboxweb.addWidget(self.browser)
 
@@ -79,7 +81,6 @@ class WebCharts(QWidget):
     # TODO(zhou):实现按钮的停止刷新文字倒计时5秒
     def autoload(self):
         '''每隔5秒 ，自动更新当前页面的数据'''
-
         # 获取当前信号发送者
         sender = self.sender()
         if sender.text() == '自动刷新网页':
@@ -94,19 +95,18 @@ class WebCharts(QWidget):
         fileList = os.listdir('./echarts/')
         return fileList  # 返回获得的当前文件夹中的文件名列表
 
-    def htmlChange(self):
-        fileList_new = os.listdir('./echarts/')
-        self.combo.clear()
-        self.combo.addItems(fileList_new)
-
-    def setRefreshTime(self):
-        '''停止并重新启动计时器'''
-        self.refreshTime = self.slider.value() * 1000
-        print(self.refreshTime)
-        self.timer.stop()
-        self.timer.start(self.refreshTime)
-        self.timer_combo.stop()
-        self.timer_combo.start(self.refreshTime)
+    # def htmlChange(self):
+    #     fileList_new = os.listdir('./echarts/')
+    #     self.combo.clear()
+    #     self.combo.addItems(fileList_new)
+    #
+    # def setRefreshTime(self):
+    #     '''停止并重新启动计时器'''
+    #     # TODO :自动刷新下拉框中的内容
+    #     self.refreshTime = self.slider.value() * 1000
+    #
+    #     self.timer_combo.stop()
+    #     self.timer_combo.start(self.refreshTime)
 
 
 if __name__ == '__main__':
