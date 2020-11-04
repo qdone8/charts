@@ -37,26 +37,15 @@ class WebCharts(QWidget):
 
         self.timer = QTimer(self)  # 根据self.refresh设置的秒数刷新计时器
         self.timer.timeout.connect(lambda: self.loadweb(self.base + self.url))
-
-        # self.timer_combo = QTimer(self)
-        # self.timer_combo.timeout.connect(lambda: self.htmlChange())
-        # self.timer_combo.start(self.refreshTime)
-
-        self.slider = QSlider(self)
-        self.slider.setOrientation(Qt.Horizontal)
-
-        # # TODO:设置slider的宽度样式
-        # self.slider.setMaximum(50)
-        # self.slider.setMinimum(10)
-        # self.slider.setSingleStep(10)
-        # self.slider.valueChanged.connect(self.setRefreshTime)
+        self.btn_data=QPushButton('刷新数据')
+        self.btn_data.clicked.connect(self.reloadData)
 
 
         hbox = QHBoxLayout()
         hbox.addWidget(self.combo)
         hbox.addWidget(self.btn)
         hbox.addWidget(self.btn_auto)
-        # hbox.addWidget(self.slider)
+        hbox.addWidget(self.btn_data)
         hboxweb = QHBoxLayout()
         hboxweb.addWidget(self.browser)
 
@@ -95,19 +84,19 @@ class WebCharts(QWidget):
         fileList = os.listdir('./echarts/')
         return fileList  # 返回获得的当前文件夹中的文件名列表
 
-    # def htmlChange(self):
-    #     fileList_new = os.listdir('./echarts/')
-    #     self.combo.clear()
-    #     self.combo.addItems(fileList_new)
-    #
-    # def setRefreshTime(self):
-    #     '''停止并重新启动计时器'''
-    #     # TODO :自动刷新下拉框中的内容
-    #     self.refreshTime = self.slider.value() * 1000
-    #
-    #     self.timer_combo.stop()
-    #     self.timer_combo.start(self.refreshTime)
+    def reloadData(self):
+        '''手动刷新下拉列表中的文件名'''
+        # TODO：需要完善增加和删除文件后，索引没有的问题
+        file=self.getHtmlFile()  #获取./echarts目录下的所有html文件名列表
+        currentText=self.combo.currentText() #用currentText记录原下拉框的当前项文本值
 
+        self.combo.clear()
+        self.combo.addItems(file)
+
+        c_index=self.combo.findText(currentText)
+        if c_index==-1:
+            c_index=0
+        self.combo.setCurrentIndex(c_index)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
