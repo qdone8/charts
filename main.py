@@ -93,7 +93,7 @@ class WebCharts(QWidget):
         self.combo.clear()
         self.combo.addItems(file)
 
-        c_index=self.combo.findText(currentText)
+        c_index=self.combo.findText(currentText) #c_index 当能查到加载前的下拉项文本，ok ；若不能查询到原先相同文件名则设置c_index为默认0值，及显示新内容的首条记录
         if c_index==-1:
             c_index=0
         self.combo.setCurrentIndex(c_index)
