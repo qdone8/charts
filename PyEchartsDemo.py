@@ -38,5 +38,24 @@ d=(
     Funnel()
     .add('商品',[list(z) for z in zip(Faker.choose(),Faker.values())])
     .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-基本示例"))
+
     .render("./echarts/funnel_base.html")
 )
+
+e=(
+    Funnel()
+    .add('商品',[list(z) for z in zip(Faker.choose(),Faker.values())],label_opts=opts.LabelOpts(position='inside'))
+    .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-内部标签"))
+
+    .render("./echarts/funnel_label_inside.html")
+)
+
+f=(
+    Funnel()
+    .add('商品',[list(z) for z in zip(Faker.choose(),Faker.values())],label_opts=opts.LabelOpts(position='inside'),sort_="ascending")
+    .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-内部标签"))
+
+    .render("./echarts/funnel_label_inside_sort.html")
+)
+
+

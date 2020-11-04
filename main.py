@@ -14,7 +14,7 @@ class WebCharts(QWidget):
     def initUI(self):
 
         self.setWindowTitle("PyQt5 Web Charts")
-        self.setGeometry(10, 40, 940, 570)
+        self.setGeometry(10, 40, 940, 620)
         self.base = r'file:///d:/charts/echarts/'  # 默认的路径
         self.url = r""  # 默认render.html
         self.num = len(self.getHtmlFile())
@@ -26,7 +26,6 @@ class WebCharts(QWidget):
 
         self.browser = QWebEngineView(self)
         self.browser.setGeometry(0, 0, self.width(), self.height() - 50)
-
         self.browser.load(QUrl(self.base + self.url))
 
         self.btn = QPushButton("手动刷新网页")
@@ -40,16 +39,31 @@ class WebCharts(QWidget):
         self.btn_data = QPushButton('刷新数据')
         self.btn_data.clicked.connect(self.reloadData)
 
+        self.lineEdit=QLineEdit()
+        #https://www.makeapie.com/preview.html?c=x-tlZUDQhT&v=3
+        #https://www.makeapie.com/preview.html?c=xTGZitHiBB&v=10
+        self.lineEdit.setText(r'https://www.makeapie.com/preview.html?c=x_kEnG-Ggq&v=2')
+        #self.lineEdit.setPlaceholderText("请输入一个外部网址！格式http://www...")
+        self.btn_line=QPushButton("载入外部图表")
+        self.btn_line.clicked.connect(lambda:self.loadweb(self.lineEdit.text()))
+
         hbox = QHBoxLayout()
         hbox.addWidget(self.combo)
         hbox.addWidget(self.btn)
         hbox.addWidget(self.btn_auto)
         hbox.addWidget(self.btn_data)
+
+        hbox2 = QHBoxLayout()  #增加一个新的水平布局
+        hbox2.addWidget(self.lineEdit)
+        hbox2.addWidget(self.btn_line)
+
+
         hboxweb = QHBoxLayout()
         hboxweb.addWidget(self.browser)
 
         vbox = QVBoxLayout()
         vbox.addLayout(hboxweb)
+        vbox.addLayout(hbox2)
         vbox.addLayout(hbox)
 
         self.setLayout(vbox)
